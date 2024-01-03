@@ -1,0 +1,51 @@
+{% include 'header.html' %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 p-3">
+            <div class="row">
+                {% for item in cart_items %}
+                <div class="col-md-5 mb-4" style="background-color: black;"> <!-- Added mb-4 class for margin-bottom -->
+                    <div class="card h-80" style="background-color: black;"> <!-- Added h-100 class for equal card height -->
+                        <div class="col-12 mt-3">
+                            <img src="{{item.coffee_id.image.url}}" class="card-img-top" alt="{{item.coffee_id.coffee_name}}"
+                                width="300px" height="300px">
+                        </div>
+                        <div class="card-body">
+                            <center>
+                                <p class="card-title text-white" style="font-size: 30px;"><b>{{item.coffee_id.coffee_name}}</b></p>
+                            </center>
+                                <p class="card-text text-white">{{item.coffee_id.desc}}</p>
+                            <center>
+                                <p  style="padding-bottom: 15px; font-family: 25px;" class="card-text text-white">Rs.{{item.coffee_id.price}}</p>
+                            </center>
+                            <p class="text-white">
+                                <strong>QTY:</strong>
+                                <a href="/updateqty/0/{{item.coffee_id.coffee_id}}"><button class="btn btn-danger">-</button></a>
+                                <input type="number" value="{{item.qty}}">
+                                <a href="/updateqty/1/{{item.coffee_id.coffee_id}}"><button class="btn btn-success">+</button></a>
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <!-- <a href="#" class="btn btn-danger">Remove</a> -->
+                                    <a href="/remove_from_order/{{item.coffee_id.coffee_id}}" class="btn btn-danger">Remove</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            </div>
+
+        <div class="col-md-3  p-3" style="background-color: black;">
+            <h5 class="bg-danger text-white p-2">BILL DETALS</h5>
+            <p class="text-white"><strong>Total ({{items}}):</strong> Rs. {{total}}</p>
+            <hr>
+            <p class="text-white"><strong>Total:</strong> Rs. {{total}} </p>
+            <a href="{% url 'makepayment' %}"><button class="btn btn-danger"> Pay</button></a>
+        </div>
+
+    </div>
+    </div>
+
+{% include 'footer.html' %}

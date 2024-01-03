@@ -1,0 +1,49 @@
+{% load static %}
+{% include 'header.html' %}
+<title>coffe shop</title>
+<div class="container">
+<div class="row">
+    {% if query %}
+    <center><h5>Search result for:<strong>{{query}}</strong></h5></center>
+    {% endif %}
+    <div class=" p-3" style="text-align: center; background-color: black;">
+        <a href="{% url 'coffeelistview' %}" class="anchor text-white" style="font-size: 30PX;"><strong>Coffee</strong></a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{% url 'dessertlistview' %}" class="anchor text-white" style="font-size: 30PX;"><strong>Dessert</strong></a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{% url 'sanckslistview' %}" class="anchor text-white" style="font-size: 30PX;"><strong>Sancks</strong></a></p>
+       </div>
+       
+    <div class="col-md-12 mt-4  p-3" style="background-color: black;">
+        <div class="row" style="background-color: black;">
+            {% for item in allproducts %}
+            <div class="col-md-3 mb-4" style="background-color: black;"> <!-- Added mb-4 class for margin-bottom -->
+                <div class="card h-100" style="background-color: black;"> <!-- Added h-100 class for equal card height -->
+                    <div class="col-12 mt-3" >
+                        <img src="{{item.image.url}}" class="card-img-top" alt="{{item.coffe_name}}" width="250px" height="250px">
+                    </div>
+                    <div class="card-body" style="background-color: black;">
+                        <p class="card-title text-white" style="font-size: 30px;"><b>{{item.coffee_name}}</b></p>
+                        <p class="card-text text-white">{{item.desc}}</p>
+                        <p class="card-text text-white" style="font-size: 25;"> Rs.{{item.price}}</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href="/add_to_cart/{{item.coffee_id}}" class="btn btn-danger">Add item</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div> <!--product list-->
+    
+    
+
+
+</div>
+<!-- </div>
+<div style="margin-top: 50%;">
+{% include 'footer.html' %}
+</div> -->
