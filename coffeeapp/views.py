@@ -64,7 +64,7 @@ def userlogin(req):
 
 def userlogout(req):
     logout(req)
-    return redirect("/")
+    return redirect("/index")
 
 
 def add_to_cart(request, coffee_id):
